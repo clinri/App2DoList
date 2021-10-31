@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">App2DoList</string>
+    <string name="settings">Settings</string>
+    <string name="notes">Notes</string>
+    <string name="to_do_list">To Do List</string>
+    <string name="new_item">New</string>
 </resources>
