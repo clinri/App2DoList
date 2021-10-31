@@ -17,6 +17,8 @@ import ru.clinri.app2dolist.entities.ToDoListNames
     ], version = 1
 )
 abstract class MainDataBase : RoomDatabase() {
+
+    abstract fun getDao():Dao
     companion object {
         @Volatile
         private var INSTANCE: MainDataBase? = null
