@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import ru.clinri.app2dolist.R
 import ru.clinri.app2dolist.databinding.ActivityMainBinding
+import ru.clinri.app2dolist.fragments.FragmentManager
+import ru.clinri.app2dolist.fragments.NoteFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d("MyLog","Settings")
                 }
                 R.id.notes->{
+                    FragmentManager.setFragment(NoteFragment.newInstance(),this)
                     Log.d("MyLog","Notes")
                 }
                 R.id.to_do_list ->{
