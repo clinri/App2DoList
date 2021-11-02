@@ -9,9 +9,11 @@
         <entry key="..\:/Users/bandr/AndroidStudioProjects/App2DoList/app/src/main/res/drawable/ic_new.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/bandr/AndroidStudioProjects/App2DoList/app/src/main/res/drawable/ic_note.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/bandr/AndroidStudioProjects/App2DoList/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/bandr/AndroidStudioProjects/App2DoList/app/src/main/res/layout/activity_new_note_activiti.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/bandr/AndroidStudioProjects/App2DoList/app/src/main/res/layout/fragment_note.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/bandr/AndroidStudioProjects/App2DoList/app/src/main/res/layout/note_list_item.xml" value="0.5" />
         <entry key="..\:/Users/bandr/AndroidStudioProjects/App2DoList/app/src/main/res/menu/bottom_menu.xml" value="0.25" />
+        <entry key="..\:/Users/bandr/AndroidStudioProjects/App2DoList/app/src/main/res/menu/new_note_menu.xml" value="0.21927083333333333" />
       </map>
     </option>
   </component>
