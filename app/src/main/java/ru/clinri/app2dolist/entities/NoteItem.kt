@@ -3,6 +3,7 @@ package ru.clinri.app2dolist.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "note_List")
 data class NoteItem( // таблица для хранения заметок
@@ -16,4 +17,4 @@ data class NoteItem( // таблица для хранения заметок
     val time: String,
     @ColumnInfo(name = "category")
     val category: String
-)
+):Serializable

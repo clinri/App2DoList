@@ -8,8 +8,8 @@ import ru.clinri.app2dolist.entities.NoteItem
 
 @Dao
 interface Dao {
-    @Query("SELECT * FROM note_List")
+    @Query("SELECT * FROM note_List") // считывание из БД
     fun getAllNotes(): Flow<List<NoteItem>>
-    @Insert
+    @Insert // запись в БД
     suspend fun insertNote(note: NoteItem)
 }
