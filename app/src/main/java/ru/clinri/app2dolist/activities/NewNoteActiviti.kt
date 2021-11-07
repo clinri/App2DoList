@@ -57,7 +57,7 @@ class NewNoteActiviti : AppCompatActivity() {
     }
 
     private fun getCurentTime(): String {
-        val formatter = SimpleDateFormat("hh:mm:ss - yyyy/MM/DD", Locale.getDefault())
+        val formatter = SimpleDateFormat("hh:mm:ss - yyyy/MM/dd", Locale.getDefault())
         return formatter.format(Calendar.getInstance().time)
     }
 
