@@ -10,6 +10,10 @@ import ru.clinri.app2dolist.entities.NoteItem
 interface Dao {
     @Query("SELECT * FROM note_List") // считывание из БД
     fun getAllNotes(): Flow<List<NoteItem>>
+
+    @Query("DELETE FROM note_List WHERE id IS :id") // считывание из БД
+    suspend fun deleteNote(id: Int) // suspend позволяет делать операции из Corutines
+
     @Insert // запись в БД
     suspend fun insertNote(note: NoteItem)
 }
