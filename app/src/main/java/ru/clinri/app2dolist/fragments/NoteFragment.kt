@@ -49,6 +49,7 @@ class NoteFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRcView()
+        observer()
     }
 
     private fun initRcView() = with(binding){

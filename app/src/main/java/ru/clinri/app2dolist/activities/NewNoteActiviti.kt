@@ -50,13 +50,13 @@ class NewNoteActiviti : AppCompatActivity() {
             null,
             binding.edTitle.text.toString(),
             binding.edDiscription.text.toString(),
-            getCurentTime(),
+            getCurrentTime(),
             ""
         )
 
     }
 
-    private fun getCurentTime(): String {
+    private fun getCurrentTime(): String {
         val formatter = SimpleDateFormat("hh:mm:ss - yyyy/MM/dd", Locale.getDefault())
         return formatter.format(Calendar.getInstance().time)
     }

@@ -25,7 +25,7 @@ class NoteAdapter : ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator
         fun setData(note: NoteItem) = with(binding) {
             tvTitle.text = note.title
             tvDiscription.text = note.content
-            tvTitle.text = note.time
+            tvTime.text = note.time
         }
 
         companion object {
