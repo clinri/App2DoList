@@ -3,6 +3,7 @@ package ru.clinri.app2dolist.db
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import ru.clinri.app2dolist.entities.NoteItem
 
@@ -16,4 +17,7 @@ interface Dao {
 
     @Insert // запись в БД
     suspend fun insertNote(note: NoteItem)
+
+    @Update // перезапись
+    suspend fun updateNote(note: NoteItem)
 }

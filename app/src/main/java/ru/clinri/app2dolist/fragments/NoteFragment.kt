@@ -19,21 +19,21 @@ import ru.clinri.app2dolist.db.NoteAdapter
 import ru.clinri.app2dolist.entities.NoteItem
 
 
-class NoteFragment : BaseFragment(),NoteAdapter.Listener {
+class NoteFragment : BaseFragment(), NoteAdapter.Listener {
     private lateinit var binding: FragmentNoteBinding
     private lateinit var editLauncher: ActivityResultLauncher<Intent>
     private lateinit var adapter: NoteAdapter
 
-    private val mainVeiwModel: MainViewModel by activityViewModels{
+    private val mainVeiwModel: MainViewModel by activityViewModels {
         MainViewModel.MainViewModelFactory((context?.applicationContext as MainApp).database)
 
     }
 
-    override fun onClickNew(){
-        editLauncher.launch(Intent(activity, NewNoteActiviti:: class.java))
+    override fun onClickNew() {
+        editLauncher.launch(Intent(activity, NewNoteActiviti::class.java))
     }
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onEditResult()
     }
@@ -52,25 +52,31 @@ class NoteFragment : BaseFragment(),NoteAdapter.Listener {
         observer()
     }
 
-    private fun initRcView() = with(binding){
+    private fun initRcView() = with(binding) {
         rcViewNote.layoutManager = LinearLayoutManager(activity)
         adapter = NoteAdapter(this@NoteFragment)
         rcViewNote.adapter = adapter
     }
 
-    private fun observer(){ //будет следить за изменениями в БД
+    private fun observer() { //будет следить за изменениями в БД
         mainVeiwModel.allNotes.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
     }
 
-    private fun onEditResult(){
+    private fun onEditResult() {
         editLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()){
-            if (it.resultCode == Activity.RESULT_OK){
-                //Log.d("MyLog", "title: ${it.data?.getStringExtra(TITLE_KEY)}")
-                //Log.d("MyLog", "discription: ${it.data?.getStringExtra(DISK_KEY)}")
-                mainVeiwModel.insertNote(it.data?.getSerializableExtra(NEW_NOTE_KEY) as NoteItem)
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val editState = it.data?.getStringExtra(EDIT_STATE_KEY)
+                if (editState == "update") {
+                    mainVeiwModel.updateNote(it.data?.getSerializableExtra(NEW_NOTE_KEY) as NoteItem)
+                } else {
+                    //Log.d("MyLog", "title: ${it.data?.getStringExtra(TITLE_KEY)}")
+                    //Log.d("MyLog", "discription: ${it.data?.getStringExtra(DISK_KEY)}")
+                    mainVeiwModel.insertNote(it.data?.getSerializableExtra(NEW_NOTE_KEY) as NoteItem)
+                }
             }
 
         }
@@ -78,11 +84,20 @@ class NoteFragment : BaseFragment(),NoteAdapter.Listener {
 
     companion object {
         const val NEW_NOTE_KEY = "new_note_key"
+        const val EDIT_STATE_KEY = "edit_state_key"
+
         @JvmStatic
         fun newInstance() = NoteFragment()
     }
 
     override fun deleteItem(id: Int) {
         mainVeiwModel.deleteNote(id)
+    }
+
+    override fun onClickItem(note: NoteItem) {
+        val intent = Intent(activity, NewNoteActiviti::class.java).apply {
+            putExtra(NEW_NOTE_KEY, note)
+        }
+        editLauncher.launch(intent)
     }
 }
