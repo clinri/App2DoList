@@ -1,5 +1,6 @@
 package ru.clinri.app2dolist.db
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.clinri.app2dolist.R
 import ru.clinri.app2dolist.databinding.NoteListItemBinding
 import ru.clinri.app2dolist.entities.NoteItem
+import ru.clinri.app2dolist.utils.HtmlManager
 
 class NoteAdapter(private val listener: Listener) : ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator()) {
 
@@ -24,7 +26,7 @@ class NoteAdapter(private val listener: Listener) : ListAdapter<NoteItem, NoteAd
         private val binding = NoteListItemBinding.bind(view)
         fun setData(note: NoteItem, listener: Listener) = with(binding) {
             tvTitle.text = note.title
-            tvDiscription.text = note.content
+            tvDiscription.text = HtmlManager.getFromHtml(note.content).trim()
             tvTime.text = note.time
             itemView.setOnClickListener{
                 listener.onClickItem(note)

@@ -5,6 +5,21 @@
         android:title="Save"
         android:id="@+id/id_save"
         android:icon="@drawable/ic_save"
+        android:orderInCategory="3"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:title="Bold"
+        android:id="@+id/id_bold"
+        android:icon="@drawable/ic_bold"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:title="Color"
+        android:id="@+id/id_color"
+        android:icon="@drawable/ic_color"
+        android:orderInCategory="1"
         app:showAsAction="ifRoom"
         />
 
