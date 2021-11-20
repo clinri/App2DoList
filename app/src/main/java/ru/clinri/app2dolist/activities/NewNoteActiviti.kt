@@ -1,5 +1,6 @@
 package ru.clinri.app2dolist.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Paint
 import android.graphics.Typeface
@@ -17,6 +18,7 @@ import ru.clinri.app2dolist.databinding.ActivityNewNoteBinding
 import ru.clinri.app2dolist.entities.NoteItem
 import ru.clinri.app2dolist.fragments.NoteFragment
 import ru.clinri.app2dolist.utils.HtmlManager
+import ru.clinri.app2dolist.utils.MyTouchListener
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,6 +32,12 @@ class NewNoteActiviti : AppCompatActivity() {
         setContentView(binding.root)
         actionBarSettings()
         getNote()
+        init()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun init(){
+        binding.colorPicker.setOnTouchListener(MyTouchListener())
     }
 
     private fun getNote() {
