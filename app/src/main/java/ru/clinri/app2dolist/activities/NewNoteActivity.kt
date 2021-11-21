@@ -2,13 +2,13 @@ package ru.clinri.app2dolist.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Paint
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -24,7 +24,7 @@ import ru.clinri.app2dolist.utils.MyTouchListener
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NewNoteActiviti : AppCompatActivity() {
+class NewNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewNoteBinding
     private var note: NoteItem? = null
 
@@ -36,6 +36,7 @@ class NewNoteActiviti : AppCompatActivity() {
         getNote()
         init()
         onClickColorPicker()
+        actionMenuCallback()
     }
 
     private fun onClickColorPicker() = with(binding) {
@@ -128,7 +129,7 @@ class NewNoteActiviti : AppCompatActivity() {
 
         edDiscription.text.setSpan(
             ForegroundColorSpan(
-                ContextCompat.getColor(this@NewNoteActiviti, colorId)
+                ContextCompat.getColor(this@NewNoteActivity, colorId)
             ),
             startPos, endPos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
@@ -207,4 +208,25 @@ class NewNoteActiviti : AppCompatActivity() {
         })
         binding.colorPicker.startAnimation(openAnim)
     }
+
+    private fun actionMenuCallback() {
+        val actionCallback = object : ActionMode.Callback {
+            override fun onCreateActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+                p1?.clear()
+                return true
+            }
+            override fun onPrepareActionMode(p0: ActionMode?, p1: Menu?): Boolean {
+                p1?.clear()
+                return true
+            }
+            override fun onActionItemClicked(p0: ActionMode?, p1: MenuItem?): Boolean {
+                return true
+            }
+            override fun onDestroyActionMode(p0: ActionMode?) {
+
+            }
+        }
+        binding.edDiscription.customSelectionActionModeCallback = actionCallback
+    }
+
 }

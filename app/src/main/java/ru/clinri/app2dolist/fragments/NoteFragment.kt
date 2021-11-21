@@ -3,7 +3,6 @@ package ru.clinri.app2dolist.fragments
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.clinri.app2dolist.activities.MainApp
-import ru.clinri.app2dolist.activities.NewNoteActiviti
+import ru.clinri.app2dolist.activities.NewNoteActivity
 import ru.clinri.app2dolist.databinding.FragmentNoteBinding
 import ru.clinri.app2dolist.db.MainViewModel
 import ru.clinri.app2dolist.db.NoteAdapter
@@ -30,7 +29,7 @@ class NoteFragment : BaseFragment(), NoteAdapter.Listener {
     }
 
     override fun onClickNew() {
-        editLauncher.launch(Intent(activity, NewNoteActiviti::class.java))
+        editLauncher.launch(Intent(activity, NewNoteActivity::class.java))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,7 +94,7 @@ class NoteFragment : BaseFragment(), NoteAdapter.Listener {
     }
 
     override fun onClickItem(note: NoteItem) {
-        val intent = Intent(activity, NewNoteActiviti::class.java).apply {
+        val intent = Intent(activity, NewNoteActivity::class.java).apply {
             putExtra(NEW_NOTE_KEY, note)
         }
         editLauncher.launch(intent)
