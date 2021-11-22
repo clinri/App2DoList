@@ -41,7 +41,7 @@
                 android:id="@+id/bCreate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Create List" />
+                android:text="@string/create_list" />
 
         </LinearLayout>
 
