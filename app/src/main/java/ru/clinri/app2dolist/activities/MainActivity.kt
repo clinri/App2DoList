@@ -8,7 +8,7 @@ import ru.clinri.app2dolist.databinding.ActivityMainBinding
 import ru.clinri.app2dolist.dialogs.NewListDialog
 import ru.clinri.app2dolist.fragments.FragmentManager
 import ru.clinri.app2dolist.fragments.NoteFragment
-import ru.clinri.app2dolist.fragments.ShopListNamesFragment
+import ru.clinri.app2dolist.fragments.ToDoListNamesFragment
 
 class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     lateinit var binding: ActivityMainBinding
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        FragmentManager.setFragment(ShopListNamesFragment.newInstance(),this)
+        FragmentManager.setFragment(ToDoListNamesFragment.newInstance(),this)
         setBottomNavListener()
     }
 
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
                     Log.d("MyLog","Notes")
                 }
                 R.id.to_do_list ->{
-                    FragmentManager.setFragment(ShopListNamesFragment.newInstance(),this)
+                    FragmentManager.setFragment(ToDoListNamesFragment.newInstance(),this)
                     Log.d("MyLog","List")
                 }
                 R.id.new_item ->{

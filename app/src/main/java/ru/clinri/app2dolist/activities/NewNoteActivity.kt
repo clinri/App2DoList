@@ -21,6 +21,7 @@ import ru.clinri.app2dolist.entities.NoteItem
 import ru.clinri.app2dolist.fragments.NoteFragment
 import ru.clinri.app2dolist.utils.HtmlManager
 import ru.clinri.app2dolist.utils.MyTouchListener
+import ru.clinri.app2dolist.utils.TimeManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -133,7 +134,6 @@ class NewNoteActivity : AppCompatActivity() {
             ),
             startPos, endPos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
-
         edDiscription.text.trim()
         edDiscription.setSelection(startPos)
     }
@@ -168,15 +168,10 @@ class NewNoteActivity : AppCompatActivity() {
             null,
             binding.edTitle.text.toString(),
             HtmlManager.toHTML(binding.edDiscription.text),
-            getCurrentTime(),
+            TimeManager.getCurrentTime(),
             ""
         )
 
-    }
-
-    private fun getCurrentTime(): String {
-        val formatter = SimpleDateFormat("HH:mm:ss - dd/MM/yyyy", Locale.getDefault())
-        return formatter.format(Calendar.getInstance().time)
     }
 
     private fun actionBarSettings() {

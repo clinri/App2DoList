@@ -11,9 +11,11 @@ import ru.clinri.app2dolist.activities.MainApp
 import ru.clinri.app2dolist.databinding.FragmentShopListNamesBinding
 import ru.clinri.app2dolist.db.MainViewModel
 import ru.clinri.app2dolist.dialogs.NewListDialog
+import ru.clinri.app2dolist.entities.ToDoListName
+import ru.clinri.app2dolist.utils.TimeManager
 
 
-class ShopListNamesFragment : BaseFragment() {
+class ToDoListNamesFragment : BaseFragment() {
     private lateinit var binding: FragmentShopListNamesBinding
 
     private val mainVeiwModel: MainViewModel by activityViewModels {
@@ -26,6 +28,15 @@ class ShopListNamesFragment : BaseFragment() {
         object : NewListDialog.Listener{
             override fun onClick(name: String) {
                 Log.d("MyLog", "Name: $name")
+                val toDoListName = ToDoListName(
+                    null,
+                    name,
+                    TimeManager.getCurrentTime(),
+                    0,
+                    0,
+                    ""
+                )
+                mainVeiwModel.insertToDoListName(toDoListName)
             }
         })
     }
@@ -54,7 +65,7 @@ class ShopListNamesFragment : BaseFragment() {
     }
 
     private fun observer() { //будет следить за изменениями в БД
-        mainVeiwModel.allNotes.observe(viewLifecycleOwner, {
+        mainVeiwModel.allToDoListNames.observe(viewLifecycleOwner, {
 
         })
     }
@@ -62,7 +73,7 @@ class ShopListNamesFragment : BaseFragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance() = ShopListNamesFragment()
+        fun newInstance() = ToDoListNamesFragment()
     }
 
 }

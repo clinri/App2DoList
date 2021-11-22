@@ -7,13 +7,13 @@ import androidx.room.RoomDatabase
 import ru.clinri.app2dolist.entities.LibraryItem
 import ru.clinri.app2dolist.entities.NoteItem
 import ru.clinri.app2dolist.entities.ToDoListItem
-import ru.clinri.app2dolist.entities.ToDoListNames
+import ru.clinri.app2dolist.entities.ToDoListName
 
 @Database(
     entities = [LibraryItem::class,
         NoteItem::class,
         ToDoListItem::class,
-        ToDoListNames::class
+        ToDoListName::class
     ], version = 1
 )
 abstract class MainDataBase : RoomDatabase() {

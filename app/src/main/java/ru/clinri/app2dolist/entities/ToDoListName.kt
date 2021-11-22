@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity(tableName = "to_do_list_names")
-data class ToDoListNames(
+data class ToDoListName(
     @PrimaryKey(autoGenerate = true) //идентификатор
     val id: Int?,
 
