@@ -43,6 +43,6 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     }
 
     override fun onClick(name: String) {
-        Log.d("MyLog","Name: $name")
+        Log.d("MyLog","List name: $name")
     }
 }
