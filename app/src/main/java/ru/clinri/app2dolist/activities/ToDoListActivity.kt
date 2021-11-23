@@ -11,7 +11,7 @@ class ToDoListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityToDoListBinding
 
     //берем элемент названия списка чтобы
-    // получить оттуда инентификаторы элементов этого списка
+    // получить оттуда идентификаторы элементов этого списка
     private var toDoListName: ToDoListName? = null
 
     private val mainVeiwModel: MainViewModel by viewModels {
