@@ -1,0 +1,66 @@
+package ru.clinri.app2dolist.db
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import ru.clinri.app2dolist.R
+import ru.clinri.app2dolist.databinding.ListNameItemBinding
+import ru.clinri.app2dolist.databinding.NoteListItemBinding
+import ru.clinri.app2dolist.entities.NoteItem
+import ru.clinri.app2dolist.entities.ToDoListName
+import ru.clinri.app2dolist.utils.HtmlManager
+
+class ToDoListNamesAdapter() : ListAdapter<ToDoListName, ToDoListNamesAdapter.ItemHolder>(ItemComparator()) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
+        return ItemHolder.create(parent)
+    }
+
+    override fun onBindViewHolder(holder: ItemHolder, position: Int) {
+        holder.setData(getItem(position))
+    }
+
+    class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val binding = ListNameItemBinding.bind(view)
+        fun setData(shopListNameItem: ToDoListName) = with(binding) {
+            tvListName.text = shopListNameItem.name
+            tvTime.text = shopListNameItem.time
+            itemView.setOnClickListener{
+
+            }
+            imDelete.setOnClickListener{
+
+            }
+        }
+
+        companion object {
+            fun create(parent: ViewGroup): ItemHolder {
+                return ItemHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.list_name_item, parent, false)
+                )
+            }
+        }
+    }
+
+    class ItemComparator: DiffUtil.ItemCallback<ToDoListName>() {
+        override fun areItemsTheSame(oldItem: ToDoListName, newItem: ToDoListName): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: ToDoListName, newItem: ToDoListName): Boolean {
+            return oldItem == newItem
+        }
+
+    }
+
+    interface Listener{
+        fun deleteItem(id: Int)
+        fun onClickItem(toDoListName: ToDoListName)
+    }
+
+
+}

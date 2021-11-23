@@ -7,16 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.clinri.app2dolist.activities.MainApp
-import ru.clinri.app2dolist.databinding.FragmentShopListNamesBinding
+import ru.clinri.app2dolist.databinding.FragmentToDoListNamesBinding
 import ru.clinri.app2dolist.db.MainViewModel
+import ru.clinri.app2dolist.db.ToDoListNamesAdapter
 import ru.clinri.app2dolist.dialogs.NewListDialog
 import ru.clinri.app2dolist.entities.ToDoListName
 import ru.clinri.app2dolist.utils.TimeManager
 
 
 class ToDoListNamesFragment : BaseFragment() {
-    private lateinit var binding: FragmentShopListNamesBinding
+    private lateinit var binding: FragmentToDoListNamesBinding
+    private lateinit var adapter: ToDoListNamesAdapter
 
     private val mainVeiwModel: MainViewModel by activityViewModels {
         MainViewModel.MainViewModelFactory((context?.applicationContext as MainApp).database)
@@ -50,7 +53,7 @@ class ToDoListNamesFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentShopListNamesBinding.inflate(inflater, container, false)
+        binding = FragmentToDoListNamesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -61,12 +64,15 @@ class ToDoListNamesFragment : BaseFragment() {
     }
 
     private fun initRcView() = with(binding) {
+        rcView.layoutManager = LinearLayoutManager(activity)
+        adapter = ToDoListNamesAdapter()
+        rcView.adapter = adapter
 
     }
 
     private fun observer() { //будет следить за изменениями в БД
         mainVeiwModel.allToDoListNames.observe(viewLifecycleOwner, {
-
+            adapter.submitList(it)
         })
     }
 
