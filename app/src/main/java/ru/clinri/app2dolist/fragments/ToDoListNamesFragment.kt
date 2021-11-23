@@ -12,12 +12,13 @@ import ru.clinri.app2dolist.activities.MainApp
 import ru.clinri.app2dolist.databinding.FragmentToDoListNamesBinding
 import ru.clinri.app2dolist.db.MainViewModel
 import ru.clinri.app2dolist.db.ToDoListNamesAdapter
+import ru.clinri.app2dolist.dialogs.DeleteDialog
 import ru.clinri.app2dolist.dialogs.NewListDialog
 import ru.clinri.app2dolist.entities.ToDoListName
 import ru.clinri.app2dolist.utils.TimeManager
 
 
-class ToDoListNamesFragment : BaseFragment() {
+class ToDoListNamesFragment : BaseFragment(), ToDoListNamesAdapter.Listener {
     private lateinit var binding: FragmentToDoListNamesBinding
     private lateinit var adapter: ToDoListNamesAdapter
 
@@ -65,7 +66,7 @@ class ToDoListNamesFragment : BaseFragment() {
 
     private fun initRcView() = with(binding) {
         rcView.layoutManager = LinearLayoutManager(activity)
-        adapter = ToDoListNamesAdapter()
+        adapter = ToDoListNamesAdapter(this@ToDoListNamesFragment)
         rcView.adapter = adapter
 
     }
@@ -80,6 +81,21 @@ class ToDoListNamesFragment : BaseFragment() {
 
         @JvmStatic
         fun newInstance() = ToDoListNamesFragment()
+    }
+
+    override fun deleteItem(id: Int) {
+        DeleteDialog.showDialog(context as AppCompatActivity, object : DeleteDialog.Listener{
+            override fun onClick() {
+                mainVeiwModel.deleteToDoListName(id)
+            }
+
+        })
+
+
+    }
+
+    override fun onClickItem(toDoListName: ToDoListName) {
+
     }
 
 }

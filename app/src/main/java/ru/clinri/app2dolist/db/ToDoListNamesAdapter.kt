@@ -13,26 +13,26 @@ import ru.clinri.app2dolist.entities.NoteItem
 import ru.clinri.app2dolist.entities.ToDoListName
 import ru.clinri.app2dolist.utils.HtmlManager
 
-class ToDoListNamesAdapter() : ListAdapter<ToDoListName, ToDoListNamesAdapter.ItemHolder>(ItemComparator()) {
+class ToDoListNamesAdapter(private val listener : Listener) : ListAdapter<ToDoListName, ToDoListNamesAdapter.ItemHolder>(ItemComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         return ItemHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        holder.setData(getItem(position))
+        holder.setData(getItem(position), listener)
     }
 
     class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ListNameItemBinding.bind(view)
-        fun setData(shopListNameItem: ToDoListName) = with(binding) {
+        fun setData(shopListNameItem: ToDoListName, listener: Listener) = with(binding) {
             tvListName.text = shopListNameItem.name
             tvTime.text = shopListNameItem.time
             itemView.setOnClickListener{
 
             }
             imDelete.setOnClickListener{
-
+                listener.deleteItem(shopListNameItem.id!!)
             }
         }
 
