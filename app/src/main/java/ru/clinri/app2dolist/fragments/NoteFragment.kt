@@ -25,7 +25,6 @@ class NoteFragment : BaseFragment(), NoteAdapter.Listener {
 
     private val mainVeiwModel: MainViewModel by activityViewModels {
         MainViewModel.MainViewModelFactory((context?.applicationContext as MainApp).database)
-
     }
 
     override fun onClickNew() {

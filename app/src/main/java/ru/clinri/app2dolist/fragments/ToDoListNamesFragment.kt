@@ -1,5 +1,6 @@
 package ru.clinri.app2dolist.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.clinri.app2dolist.activities.MainApp
+import ru.clinri.app2dolist.activities.ToDoListActivity
 import ru.clinri.app2dolist.databinding.FragmentToDoListNamesBinding
 import ru.clinri.app2dolist.db.MainViewModel
 import ru.clinri.app2dolist.db.ToDoListNamesAdapter
@@ -24,7 +26,6 @@ class ToDoListNamesFragment : BaseFragment(), ToDoListNamesAdapter.Listener {
 
     private val mainVeiwModel: MainViewModel by activityViewModels {
         MainViewModel.MainViewModelFactory((context?.applicationContext as MainApp).database)
-
     }
 
     override fun onClickNew() {
@@ -101,7 +102,10 @@ class ToDoListNamesFragment : BaseFragment(), ToDoListNamesAdapter.Listener {
     }
 
     override fun onClickItem(toDoListName: ToDoListName) {
-
+        val i = Intent(activity,ToDoListActivity::class.java).apply {
+            putExtra(ToDoListActivity.TO_DO_LIST_NAME, toDoListName)
+        }
+        startActivity(i)
     }
 
 }

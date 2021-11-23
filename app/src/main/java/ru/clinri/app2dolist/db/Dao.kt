@@ -17,10 +17,10 @@ interface Dao {
     fun getAllToDoListNames(): Flow<List<ToDoListName>>
 
     @Query("DELETE FROM note_List WHERE id IS :id") // удаление из БД
-    suspend fun deleteNote(id: Int) // suspend позволяет делать операции из Corutines
+    suspend fun deleteNote(id: Int) // suspend позволяет делать операции из Coroutines
 
     @Query("DELETE FROM to_do_list_names WHERE id IS :id") // удаление из БД
-    suspend fun deleteToDoListName(id: Int) // suspend позволяет делать операции из Corutines
+    suspend fun deleteToDoListName(id: Int) // suspend позволяет делать операции из Coroutines
 
     @Insert // запись в БД
     suspend fun insertNote(note: NoteItem)

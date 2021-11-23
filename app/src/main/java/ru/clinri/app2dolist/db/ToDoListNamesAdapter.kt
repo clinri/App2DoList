@@ -22,16 +22,17 @@ class ToDoListNamesAdapter(private val listener : Listener) : ListAdapter<ToDoLi
 
     class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ListNameItemBinding.bind(view)
-        fun setData(toDoListNameItem: ToDoListName, listener: Listener) = with(binding) {
-            tvListName.text = toDoListNameItem.name
-            tvTime.text = toDoListNameItem.time
+        fun setData(toDoListName: ToDoListName, listener: Listener) = with(binding) {
+            tvListName.text = toDoListName.name
+            tvTime.text = toDoListName.time
             itemView.setOnClickListener{
+                listener.onClickItem(toDoListName)
             }
             imDelete.setOnClickListener{
-                listener.deleteItem(toDoListNameItem.id!!)
+                listener.deleteItem(toDoListName.id!!)
             }
             imEdit.setOnClickListener{
-                listener.editItem(toDoListNameItem)
+                listener.editItem(toDoListName)
             }
         }
 

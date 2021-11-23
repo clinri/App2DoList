@@ -12,7 +12,8 @@ import ru.clinri.app2dolist.databinding.NoteListItemBinding
 import ru.clinri.app2dolist.entities.NoteItem
 import ru.clinri.app2dolist.utils.HtmlManager
 
-class NoteAdapter(private val listener: Listener) : ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator()) {
+class NoteAdapter(private val listener: Listener) :
+    ListAdapter<NoteItem, NoteAdapter.ItemHolder>(ItemComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         return ItemHolder.create(parent)
@@ -28,10 +29,10 @@ class NoteAdapter(private val listener: Listener) : ListAdapter<NoteItem, NoteAd
             tvTitle.text = note.title
             tvDiscription.text = HtmlManager.getFromHtml(note.content).trim()
             tvTime.text = note.time
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
                 listener.onClickItem(note)
             }
-            imDelete.setOnClickListener{
+            imDelete.setOnClickListener {
                 listener.deleteItem(note.id!!)
             }
         }
@@ -46,7 +47,7 @@ class NoteAdapter(private val listener: Listener) : ListAdapter<NoteItem, NoteAd
         }
     }
 
-    class ItemComparator: DiffUtil.ItemCallback<NoteItem>() {
+    class ItemComparator : DiffUtil.ItemCallback<NoteItem>() {
         override fun areItemsTheSame(oldItem: NoteItem, newItem: NoteItem): Boolean {
             return oldItem.id == newItem.id
         }
@@ -54,13 +55,10 @@ class NoteAdapter(private val listener: Listener) : ListAdapter<NoteItem, NoteAd
         override fun areContentsTheSame(oldItem: NoteItem, newItem: NoteItem): Boolean {
             return oldItem == newItem
         }
-
     }
 
-    interface Listener{
+    interface Listener {
         fun deleteItem(id: Int)
         fun onClickItem(note: NoteItem)
     }
-
-
 }
