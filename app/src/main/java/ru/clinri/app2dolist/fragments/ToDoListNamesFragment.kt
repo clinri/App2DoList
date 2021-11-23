@@ -42,7 +42,7 @@ class ToDoListNamesFragment : BaseFragment(), ToDoListNamesAdapter.Listener {
                 )
                 mainVeiwModel.insertToDoListName(toDoListName)
             }
-        })
+        },"")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,10 +88,16 @@ class ToDoListNamesFragment : BaseFragment(), ToDoListNamesAdapter.Listener {
             override fun onClick() {
                 mainVeiwModel.deleteToDoListName(id)
             }
-
         })
+    }
 
-
+    override fun editItem(toDoListName: ToDoListName) {
+        NewListDialog.showDialog(activity as AppCompatActivity,
+            object : NewListDialog.Listener{
+                override fun onClick(name: String) {
+                    mainVeiwModel.updateToDoListName(toDoListName.copy(name = name))
+                }
+            }, toDoListName.name)
     }
 
     override fun onClickItem(toDoListName: ToDoListName) {

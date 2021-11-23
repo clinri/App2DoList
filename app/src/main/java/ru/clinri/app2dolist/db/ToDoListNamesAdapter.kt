@@ -8,10 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.clinri.app2dolist.R
 import ru.clinri.app2dolist.databinding.ListNameItemBinding
-import ru.clinri.app2dolist.databinding.NoteListItemBinding
-import ru.clinri.app2dolist.entities.NoteItem
 import ru.clinri.app2dolist.entities.ToDoListName
-import ru.clinri.app2dolist.utils.HtmlManager
 
 class ToDoListNamesAdapter(private val listener : Listener) : ListAdapter<ToDoListName, ToDoListNamesAdapter.ItemHolder>(ItemComparator()) {
 
@@ -25,14 +22,16 @@ class ToDoListNamesAdapter(private val listener : Listener) : ListAdapter<ToDoLi
 
     class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ListNameItemBinding.bind(view)
-        fun setData(shopListNameItem: ToDoListName, listener: Listener) = with(binding) {
-            tvListName.text = shopListNameItem.name
-            tvTime.text = shopListNameItem.time
+        fun setData(toDoListNameItem: ToDoListName, listener: Listener) = with(binding) {
+            tvListName.text = toDoListNameItem.name
+            tvTime.text = toDoListNameItem.time
             itemView.setOnClickListener{
-
             }
             imDelete.setOnClickListener{
-                listener.deleteItem(shopListNameItem.id!!)
+                listener.deleteItem(toDoListNameItem.id!!)
+            }
+            imEdit.setOnClickListener{
+                listener.editItem(toDoListNameItem)
             }
         }
 
@@ -59,6 +58,7 @@ class ToDoListNamesAdapter(private val listener : Listener) : ListAdapter<ToDoLi
 
     interface Listener{
         fun deleteItem(id: Int)
+        fun editItem(toDoListName: ToDoListName)
         fun onClickItem(toDoListName: ToDoListName)
     }
 

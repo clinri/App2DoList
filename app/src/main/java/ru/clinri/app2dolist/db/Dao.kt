@@ -22,7 +22,6 @@ interface Dao {
     @Query("DELETE FROM to_do_list_names WHERE id IS :id") // удаление из БД
     suspend fun deleteToDoListName(id: Int) // suspend позволяет делать операции из Corutines
 
-
     @Insert // запись в БД
     suspend fun insertNote(note: NoteItem)
 
@@ -31,4 +30,7 @@ interface Dao {
 
     @Update // перезапись
     suspend fun updateNote(note: NoteItem)
+
+    @Update // перезапись
+    suspend fun updateToDoListName(toDoListName: ToDoListName)
 }
