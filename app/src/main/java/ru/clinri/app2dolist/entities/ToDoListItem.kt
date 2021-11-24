@@ -17,5 +17,5 @@ data class ToDoListItem(
     @ColumnInfo(name = "listId") // ид списка которому пренадлежит элемент
     val listId: Int,
     @ColumnInfo(name = "itemType")
-    val itemType: String = "item"
+    val itemType: Int = 0
 )
