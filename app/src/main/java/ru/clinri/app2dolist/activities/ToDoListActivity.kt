@@ -1,8 +1,10 @@
 package ru.clinri.app2dolist.activities
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import ru.clinri.app2dolist.R
 import ru.clinri.app2dolist.databinding.ActivityToDoListBinding
 import ru.clinri.app2dolist.db.MainViewModel
 import ru.clinri.app2dolist.entities.ToDoListName
@@ -23,6 +25,11 @@ class ToDoListActivity : AppCompatActivity() {
         binding = ActivityToDoListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.to_do_list_menu, menu)
+        return true
     }
 
     private fun init() {
