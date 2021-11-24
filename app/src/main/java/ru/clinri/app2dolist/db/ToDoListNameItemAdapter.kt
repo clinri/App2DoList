@@ -47,14 +47,14 @@ class ToDoListNameItemAdapter(private val listener: Listener) :
             fun createToDoItem(parent: ViewGroup): ItemHolder {
                 return ItemHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.list_name_item, parent, false)
+                        .inflate(R.layout.to_do_list_item, parent, false)
                 )
             }
 
             fun createLibraryItem(parent: ViewGroup): ItemHolder {
                 return ItemHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.list_name_item, parent, false)
+                        .inflate(R.layout.to_do_library_list_item, parent, false)
                 )
             }
         }

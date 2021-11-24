@@ -16,4 +16,5 @@
     <color name="picker_black">#202020</color>
     <color name="picker_yellow">#DAD130</color>
     <color name="picker_orange">#C68944</color>
+    <color name="gray">#ADADAD</color>
 </resources>
