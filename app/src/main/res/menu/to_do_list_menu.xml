@@ -17,7 +17,7 @@
         android:title="New item"
         android:id="@+id/new_item"
         android:icon="@drawable/ic_new_to_do_item"
-        android:actionLayout="@layout/edit_action_layout"
+        app:actionLayout="@layout/edit_action_layout"
         android:orderInCategory="1"
         app:showAsAction="ifRoom|collapseActionView"
         />
