@@ -3,6 +3,7 @@ package ru.clinri.app2dolist.db
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import ru.clinri.app2dolist.entities.NoteItem
+import ru.clinri.app2dolist.entities.ToDoListItem
 import ru.clinri.app2dolist.entities.ToDoListName
 
 class MainViewModel(database: MainDataBase) : ViewModel() {
@@ -16,6 +17,10 @@ class MainViewModel(database: MainDataBase) : ViewModel() {
 
     fun insertToDoListName(listName: ToDoListName) = viewModelScope.launch {
         dao.insertToDoListName(listName)
+    }
+
+    fun insertToDoListItem(listItem: ToDoListItem) = viewModelScope.launch {
+        dao.insertToDoItem(listItem)
     }
 
     fun updateNote(note: NoteItem) = viewModelScope.launch {

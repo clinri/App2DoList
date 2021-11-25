@@ -6,6 +6,7 @@ import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 import ru.clinri.app2dolist.entities.NoteItem
+import ru.clinri.app2dolist.entities.ToDoListItem
 import ru.clinri.app2dolist.entities.ToDoListName
 
 @Dao
@@ -27,6 +28,9 @@ interface Dao {
 
     @Insert // запись в БД
     suspend fun insertToDoListName(listName: ToDoListName)
+
+    @Insert // запись в БД
+    suspend fun insertToDoItem(toDoListItem: ToDoListItem)
 
     @Update // перезапись
     suspend fun updateNote(note: NoteItem)

@@ -3,11 +3,13 @@ package ru.clinri.app2dolist.activities
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.clinri.app2dolist.R
 import ru.clinri.app2dolist.databinding.ActivityToDoListBinding
 import ru.clinri.app2dolist.db.MainViewModel
+import ru.clinri.app2dolist.entities.ToDoListItem
 import ru.clinri.app2dolist.entities.ToDoListName
 
 class ToDoListActivity : AppCompatActivity() {
@@ -18,6 +20,7 @@ class ToDoListActivity : AppCompatActivity() {
     private var toDoListName: ToDoListName? = null
 
     private lateinit var saveItem: MenuItem
+    private var edItem : EditText?= null
 
 
 
@@ -36,9 +39,30 @@ class ToDoListActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.to_do_list_menu, menu)
         saveItem = menu?.findItem(R.id.save_item)!!
         val newItem = menu.findItem(R.id.new_item)
+        edItem = newItem.actionView.findViewById(R.id.edNewToDoItem) as EditText
         newItem.setOnActionExpandListener(expandActionView())
         saveItem.isVisible = false
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.save_item){
+            addNewToToItem()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun addNewToToItem(){
+        if (edItem.text.toString().isEmpty()) return
+        val item = ToDoListItem(
+            null,
+            edItem?.text.toString(),
+            null,
+            0,
+            toDoListName?.id!!,
+            0
+        )
+        mainVeiwModel.insertToDoListItem(item)
     }
 
     private fun expandActionView(): MenuItem.OnActionExpandListener{
