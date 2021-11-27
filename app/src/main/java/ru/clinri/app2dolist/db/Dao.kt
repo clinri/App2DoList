@@ -17,6 +17,9 @@ interface Dao {
     @Query("SELECT * FROM to_do_list_names") // считывание из БД
     fun getAllToDoListNames(): Flow<List<ToDoListName>>
 
+    @Query("SELECT * FROM todo_List_item WHERE listId LIKE :listId") // считывание из БД
+    fun getAllToDoListItems(listId: Int): Flow<List<ToDoListItem>>
+
     @Query("DELETE FROM note_List WHERE id IS :id") // удаление из БД
     suspend fun deleteNote(id: Int) // suspend позволяет делать операции из Coroutines
 

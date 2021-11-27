@@ -6,13 +6,15 @@ import android.view.MenuItem
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import ru.clinri.app2dolist.R
 import ru.clinri.app2dolist.databinding.ActivityToDoListBinding
 import ru.clinri.app2dolist.db.MainViewModel
+import ru.clinri.app2dolist.db.ToDoListNameItemAdapter
 import ru.clinri.app2dolist.entities.ToDoListItem
 import ru.clinri.app2dolist.entities.ToDoListName
 
-class ToDoListActivity : AppCompatActivity() {
+class ToDoListActivity : AppCompatActivity(), ToDoListNameItemAdapter.Listener {
     private lateinit var binding: ActivityToDoListBinding
 
     //берем элемент названия списка чтобы
@@ -21,6 +23,8 @@ class ToDoListActivity : AppCompatActivity() {
 
     private lateinit var saveItem: MenuItem
     private var edItem : EditText?= null
+
+    private var adapter: ToDoListNameItemAdapter? = null
 
 
 
@@ -33,6 +37,8 @@ class ToDoListActivity : AppCompatActivity() {
         binding = ActivityToDoListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+        initRcView()
+        listItemObserver()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -53,7 +59,7 @@ class ToDoListActivity : AppCompatActivity() {
     }
 
     private fun addNewToToItem(){
-        if (edItem.text.toString().isEmpty()) return
+        if (edItem?.text.toString().isEmpty()) return
         val item = ToDoListItem(
             null,
             edItem?.text.toString(),
@@ -62,7 +68,20 @@ class ToDoListActivity : AppCompatActivity() {
             toDoListName?.id!!,
             0
         )
+        edItem?.setText("")
         mainVeiwModel.insertToDoListItem(item)
+    }
+
+    private fun listItemObserver(){
+        mainVeiwModel.getAllItemsFromList(toDoListName?.id!!).observe(this,{
+            adapter?.submitList(it)
+        })
+    }
+
+    private fun initRcView()=with(binding){
+        adapter = ToDoListNameItemAdapter(this@ToDoListActivity)
+        rcViev.layoutManager = LinearLayoutManager(this@ToDoListActivity)
+        rcViev.adapter = adapter
     }
 
     private fun expandActionView(): MenuItem.OnActionExpandListener{
@@ -89,5 +108,17 @@ class ToDoListActivity : AppCompatActivity() {
 
     companion object {
         const val TO_DO_LIST_NAME = "to_do_list_names"
+    }
+
+    override fun deleteItem(id: Int) {
+
+    }
+
+    override fun editItem(toDoListName: ToDoListName) {
+
+    }
+
+    override fun onClickItem(toDoListName: ToDoListName) {
+
     }
 }

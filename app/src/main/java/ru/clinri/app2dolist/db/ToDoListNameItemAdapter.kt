@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.clinri.app2dolist.R
 import ru.clinri.app2dolist.databinding.ListNameItemBinding
+import ru.clinri.app2dolist.databinding.ToDoLibraryListItemBinding
+import ru.clinri.app2dolist.databinding.ToDoListItemBinding
 import ru.clinri.app2dolist.entities.ToDoListItem
 import ru.clinri.app2dolist.entities.ToDoListName
 
@@ -33,14 +35,17 @@ class ToDoListNameItemAdapter(private val listener: Listener) :
         return getItem(position).itemType
     }
 
-    class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ListNameItemBinding.bind(view)
-        fun setItemData(toDoListItem: ToDoListItem, listener: Listener) = with(binding) {
+    class ItemHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
+        fun setItemData(toDoListItem: ToDoListItem, listener: Listener) {
+            val binding = ToDoListItemBinding.bind(view)
+            binding.apply {
+                tvName.text = toDoListItem.name
+            }
         }
 
-        fun setLibraryData(toDoListItem: ToDoListItem, listener: Listener) = with(binding) {
-
+        fun setLibraryData(toDoListItem: ToDoListItem, listener: Listener) {
+            //val binding = ToDoLibraryListItemBinding.bind(view)
         }
 
         companion object {
