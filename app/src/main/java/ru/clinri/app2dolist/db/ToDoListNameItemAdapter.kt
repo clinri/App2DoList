@@ -41,11 +41,21 @@ class ToDoListNameItemAdapter(private val listener: Listener) :
             val binding = ToDoListItemBinding.bind(view)
             binding.apply {
                 tvName.text = toDoListItem.name
+                tvInfo.text = toDoListItem.itemInfo
+                tvInfo.visibility = infoVisibility(toDoListItem)
             }
         }
 
         fun setLibraryData(toDoListItem: ToDoListItem, listener: Listener) {
             //val binding = ToDoLibraryListItemBinding.bind(view)
+        }
+
+        fun infoVisibility(toDoListItem: ToDoListItem): Int{
+            return if (toDoListItem.itemInfo.isNullOrEmpty()) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
         }
 
         companion object {

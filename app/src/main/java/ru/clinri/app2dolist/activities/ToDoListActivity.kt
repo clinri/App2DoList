@@ -3,6 +3,7 @@ package ru.clinri.app2dolist.activities
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -22,10 +23,9 @@ class ToDoListActivity : AppCompatActivity(), ToDoListNameItemAdapter.Listener {
     private var toDoListName: ToDoListName? = null
 
     private lateinit var saveItem: MenuItem
-    private var edItem : EditText?= null
+    private var edItem: EditText? = null
 
     private var adapter: ToDoListNameItemAdapter? = null
-
 
 
     private val mainVeiwModel: MainViewModel by viewModels {
@@ -52,13 +52,13 @@ class ToDoListActivity : AppCompatActivity(), ToDoListNameItemAdapter.Listener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.save_item){
+        if (item.itemId == R.id.save_item) {
             addNewToToItem()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun addNewToToItem(){
+    private fun addNewToToItem() {
         if (edItem?.text.toString().isEmpty()) return
         val item = ToDoListItem(
             null,
@@ -72,20 +72,25 @@ class ToDoListActivity : AppCompatActivity(), ToDoListNameItemAdapter.Listener {
         mainVeiwModel.insertToDoListItem(item)
     }
 
-    private fun listItemObserver(){
-        mainVeiwModel.getAllItemsFromList(toDoListName?.id!!).observe(this,{
+    private fun listItemObserver() {
+        mainVeiwModel.getAllItemsFromList(toDoListName?.id!!).observe(this, {
             adapter?.submitList(it)
+            binding.tvEmpty.visibility = if (it.isEmpty()) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         })
     }
 
-    private fun initRcView()=with(binding){
+    private fun initRcView() = with(binding) {
         adapter = ToDoListNameItemAdapter(this@ToDoListActivity)
         rcViev.layoutManager = LinearLayoutManager(this@ToDoListActivity)
         rcViev.adapter = adapter
     }
 
-    private fun expandActionView(): MenuItem.OnActionExpandListener{
-        return object :MenuItem.OnActionExpandListener{
+    private fun expandActionView(): MenuItem.OnActionExpandListener {
+        return object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
                 saveItem.isVisible = true
                 return true
@@ -103,7 +108,7 @@ class ToDoListActivity : AppCompatActivity(), ToDoListNameItemAdapter.Listener {
 
     private fun init() {
         toDoListName = intent.getSerializableExtra(TO_DO_LIST_NAME) as ToDoListName
-        binding.tvTest.text = toDoListName?.name
+
     }
 
     companion object {
